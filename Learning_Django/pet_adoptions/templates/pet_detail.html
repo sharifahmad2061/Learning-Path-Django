@@ -1,15 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "starter_template.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{pet.name}} Details</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>{{pet.name}}'s Home, whose age is {{pet.age}} and sex is {{pet.sex}}</h1>
-</body>
+<div>
+    <h3>{{pet.name|capfirst}}</h3>
+    <p>pet.species</p>
+    {% if pet.breed %}
+    <p>Breed: {{pet.breed}}</p>
+    {% endif%}
+    {% if pet.age %}
+    <p>Age: {{pet.age}}</p>
+    {% endif%}
+    {% if pet.sex %}
+    <p>Sex: {{pet.sex}}</p>
+    {% endif%}
+    {% if pet.vaccinations.all %}
+    <p>Vaccinated for:</p>
+    <ul>
+        {% for vaccine in pet.vaccinations.all %}
+        <li>{{vaccine.name}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>Admitted by: {{pet.admitter}}</p>
+    <p>Admitted on: {{pet.admission_date|date:"M d Y"}}</p>
+    <p>{{pet.description}}</p>
+</div>
 
-</html>
+{% endblock content %}
