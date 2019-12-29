@@ -42,7 +42,7 @@
                 <h1>Sharif Ahmad</h1>
                 <p class="lead text-muted">My Name is Sharif and My Passion is helping Businesses make important
                     decisions based on data.</p>
-                <img src="{% static 'ahmad.jpg' %}" height="400px">
+                <img src="{% static 'ahmad.jpg' %}" height="300px">
                 <p>
                     <a href="mailto:sharifahmad2061@gmail.com" class="btn btn-primary my-2">Email Me</a>
                 </p>
@@ -56,17 +56,19 @@
                     {% for job in jobs %}
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            {% if not job.image %}
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
-                                focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                    dy=".3em">Thumbnail</text>
-                            </svg>
-                            {% else %}
-                            <img src="{{job.image.url}}" height="225" width="100%">
-                            {% endif %}
+                            <a href="{% url 'job_detail' job.id %}">
+                                {% if not job.image %}
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                                    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+                                    focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%"
+                                        fill="#eceeef" dy=".3em">Thumbnail</text>
+                                </svg>
+                                {% else %}
+                                <img src="{{job.image.url}}" height="225" width="100%">
+                                {% endif %}
+                            </a>
                             <div class="card-body">
                                 <p class="card-text">{{ job.summary }}</p>
                             </div>
