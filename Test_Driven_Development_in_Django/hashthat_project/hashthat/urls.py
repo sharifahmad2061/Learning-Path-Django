@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='index'),
     path('hash/<str:hex_digest>', views.hash_detail, name='hash_detail'),
+    path('quick_hash', views.quick_hash, name='ajax_req'),
 ]

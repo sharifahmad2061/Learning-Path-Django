@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +16,23 @@
         {{ form.as_p }}
         <input name="submit" type="submit" value="HASH">
     </form>
+    <h2 id="quick-hash"></h2>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script>
+        $('#id_text').keyup(() => {
+            let text = $('#id_text').val();
+            $.ajax({
+                url: '/quick_hash',
+                data: {
+                    'text': text
+                },
+                dataType: 'json',
+                success: (data) => {
+                    $('#quick-hash').text(data['json']);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
