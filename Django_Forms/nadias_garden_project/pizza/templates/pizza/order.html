@@ -15,6 +15,9 @@
         {{ pizza_form.as_p }}
         <input type="submit" value="Order Pizza">
     </form>
+    {% if order_response %}
+    <h2>{{order_response}}</h2>
+    {% endif %}
 </body>
 
 </html>
