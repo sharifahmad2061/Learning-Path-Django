@@ -12,16 +12,7 @@
     <h1>Order a Pizza</h1>
     <form action="{% url 'order' %}" method="POST">
         {% csrf_token %}
-        <label for="topping1">Topping 1</label>
-        <input id="topping1" type="text" name="topping1">
-        <label for="topping2">Topping 2</label>
-        <input id="topping2" type="text" name="topping2">
-        <label for="pizza-size">Pizza size</label>
-        <select id="pizza-size" name="pizza-size">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-        </select>
+        {{ pizza_form.as_p }}
         <input type="submit" value="Order Pizza">
     </form>
 </body>

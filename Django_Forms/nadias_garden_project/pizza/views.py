@@ -8,5 +8,5 @@ def index(request):
 
 
 def order(request):
-    pizzaform = PizzaForm()
-    return render(request, 'pizza/order.html', {'pizza_form': pizzaform})
+    pizza_form = PizzaForm()
+    return render(request, 'pizza/order.html', {'pizza_form': pizza_form})
