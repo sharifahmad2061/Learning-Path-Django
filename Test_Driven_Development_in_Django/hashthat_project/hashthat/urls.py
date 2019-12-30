@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from hashing import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.homepage, name='index'),
+    path('hash/<str:hex_digest>', views.hash_detail, name='hash_detail'),
 ]
