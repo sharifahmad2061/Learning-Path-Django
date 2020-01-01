@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('order', views.order, name='order'),
+    path('pizzas', views.multiple_pizzas, name='multiple_pizzas'),
 ]

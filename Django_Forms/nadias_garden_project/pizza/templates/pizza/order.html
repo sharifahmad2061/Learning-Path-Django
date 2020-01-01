@@ -18,6 +18,12 @@
     {% if order_response %}
     <h2>{{order_response}}</h2>
     {% endif %}
+    <br>
+    <span>Want more than One Pizza</span>
+    <form action="{% url 'pizzas' %}" method="GET">
+        {{multiple_pizza_form.as_p}}
+        <input type="submit" value="Get Pizzas">
+    </form>
 </body>
 
 </html>
