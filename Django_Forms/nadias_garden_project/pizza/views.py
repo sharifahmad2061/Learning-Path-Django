@@ -14,12 +14,11 @@ def order(request):
         if filled_form.is_valid():
             # save pizza order to db
             pizza = Pizza()
-            size = Size()
+            size = Size.objects.get(
+                title=filled_form.cleaned_data['pizza_size'])
             pizza.topping1 = filled_form.cleaned_data['topping1']
             pizza.topping2 = filled_form.cleaned_data['topping2']
-            size.title = filled_form.cleaned_data['pizza_size']
             pizza.size = size
-            size.save()
             pizza.save()
             #send user response
             response = 'Your {} pizza with {} & {} toppings is on its way!'.format(
