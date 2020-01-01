@@ -47,20 +47,28 @@ def multiple_pizzas(request):
     filled_multiple_pizza_form = MultiplePizzaForm(request.GET)
     if filled_multiple_pizza_form.is_valid():
         number = filled_multiple_pizza_form.cleaned_data['number']
-        PizzaFormSet = formset_factory(PizzaForm, extra=number)
+    PizzaFormSet = formset_factory(PizzaForm, extra=number)
+    formset = PizzaFormSet()
+    if request.method == 'POST':
+        filled_formset = PizzaFormSet(request.POST)
+        if filled_formset.is_valid():
+            for form in filled_formset:
+                print(form.cleaned_data['topping1'])
+            note = 'Pizzas have been ordered'
+            print('hello')
+        else:
+            note = 'Orders have not been placed'
+        return render(request, 'pizza/multiple_pizzas.html', {
+            'note': note,
+            'formset': formset,
+        })
+    elif request.method == 'GET':
+        return render(request, 'pizza/multiple_pizzas.html',
+                      {'formset': formset})
+    else:
+        PizzaFormSet = formset_factory(PizzaForm, extra=2)
         formset = PizzaFormSet()
-        if request.method == 'POST':
-            filled_formset = PizzaFormSet(request.POST)
-            if filled_formset.is_valid():
-                for form in filled_formset:
-                    print(form.cleaned_data['topping1'])
-                note = 'Pizzas have been ordered'
-            else:
-                note = 'Orders have not been placed'
-            return render(request, 'pizza/mutiple_pizzas.html', {
-                'note': note,
-                'formset': formset
-            })
-        elif request.method == 'GET':
-            return render(request, 'pizza/multiple_pizzas.html',
-                          {'formset': formset})
+        return render(request, 'pizza/multiple_pizzas.html', {
+            'note': 'there was some error in multiple form',
+            'formset': formset
+        })
