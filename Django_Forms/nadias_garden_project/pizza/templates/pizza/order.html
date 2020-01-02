@@ -1,3 +1,5 @@
+{% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,29 +7,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <title>Nadia's Garden</title>
 </head>
 
 <body>
-    <h1>Order a Pizza</h1>
-    <form action="{% url 'order' %}" method="POST">
-        {% csrf_token %}
-        {{ pizza_form.as_p }}
-        <input type="submit" value="Order Pizza">
-    </form>
-    {% if order_response %}
-    <h2>{{order_response}}</h2>
-    {% endif %}
-    <br>
-    {% if created_pizza_id %}
-    <h3><a href="{% url 'edit_order' created_pizza_id %}">Edit Your Order</a></h3>
-    {% endif %}
-    <br>
-    <span>Want more than One Pizza</span>
-    <form action="{% url 'multiple_pizzas' %}" method="GET">
-        {{multiple_pizza_form.as_p}}
-        <input type="submit" value="Get Pizzas">
-    </form>
+    <div class="container">
+        <h1>Order a Pizza</h1>
+        <form action="{% url 'order' %}" method="POST">
+            {% csrf_token %}
+            {% for field in pizza_form %}
+            <div class="form-group">
+                {{field.errors}}
+                {{field.label_tag}}
+                {% render_field field class="form-control" %}
+            </div>
+            {% endfor %}
+            <input type="submit" value="Order Pizza">
+        </form>
+        {% if order_response %}
+        <h2>{{order_response}}</h2>
+        {% endif %}
+        <br>
+        {% if created_pizza_id %}
+        <h3><a href="{% url 'edit_order' created_pizza_id %}">Edit Your Order</a></h3>
+        {% endif %}
+        <br>
+        <span>Want more than One Pizza</span>
+        <form action="{% url 'multiple_pizzas' %}" method="GET">
+            {{multiple_pizza_form.as_p}}
+            <input type="submit" value="Get Pizzas">
+        </form>
+    </div>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
 </body>
 
 </html>
