@@ -15,14 +15,8 @@ def order(request):
         filled_form = PizzaForm(request.POST)
         if filled_form.is_valid():
             # save pizza order to db
-            filled_form.save()
-            # pizza = Pizza()
-            # size = Size.objects.get(
-            #     title=filled_form.cleaned_data['pizza_size'])
-            # pizza.topping1 = filled_form.cleaned_data['topping1']
-            # pizza.topping2 = filled_form.cleaned_data['topping2']
-            # pizza.size = size
-            # pizza.save()
+            created_pizza = filled_form.save()
+            created_pizza_id = created_pizza.id
             #send user response
             response = 'Your {} pizza with {} & {} toppings is on its way!'.format(
                 filled_form.cleaned_data['size'],
@@ -34,6 +28,7 @@ def order(request):
                     'pizza_form': new_form,
                     'order_response': response,
                     'multiple_pizza_form': multiple_pizza_form,
+                    'created_pizza_id': created_pizza_id,
                 })
     else:
         pizza_form = PizzaForm()
@@ -77,3 +72,20 @@ def multiple_pizzas(request):
 
 def edit_order(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
+    form = PizzaForm(instance=pizza)
+    if request.method == 'POST':
+        filled_form = PizzaForm(request.POST, instance=pizza)
+        if filled_form.is_valid():
+            filled_form.save()
+            form = filled_form
+            note = 'your pizza order has been updated!'
+            return render(request, 'pizza/edit_order.html', {
+                'note': note,
+                'pizza_form': form,
+                'pizza': pizza,
+            })
+
+    return render(request, 'pizza/edit_order.html', {
+        'pizza_form': form,
+        'pizza': pizza,
+    })

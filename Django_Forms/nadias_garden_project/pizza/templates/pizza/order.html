@@ -19,6 +19,10 @@
     <h2>{{order_response}}</h2>
     {% endif %}
     <br>
+    {% if created_pizza_id %}
+    <h3><a href="{% url 'edit_order' created_pizza_id %}">Edit Your Order</a></h3>
+    {% endif %}
+    <br>
     <span>Want more than One Pizza</span>
     <form action="{% url 'multiple_pizzas' %}" method="GET">
         {{multiple_pizza_form.as_p}}
