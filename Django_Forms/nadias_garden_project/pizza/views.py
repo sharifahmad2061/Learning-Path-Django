@@ -22,14 +22,17 @@ def order(request):
                 filled_form.cleaned_data['size'],
                 filled_form.cleaned_data['topping1'],
                 filled_form.cleaned_data['topping2'])
-            new_form = PizzaForm()
-            return render(
-                request, 'pizza/order.html', {
-                    'pizza_form': new_form,
-                    'order_response': response,
-                    'multiple_pizza_form': multiple_pizza_form,
-                    'created_pizza_id': created_pizza_id,
-                })
+            filled_form = PizzaForm()
+        else:
+            created_pizza_id = None
+            response = 'Pizza Order Failed. Try Again !!!'
+        return render(
+            request, 'pizza/order.html', {
+                'pizza_form': filled_form,
+                'order_response': response,
+                'multiple_pizza_form': multiple_pizza_form,
+                'created_pizza_id': created_pizza_id,
+            })
     else:
         pizza_form = PizzaForm()
         return render(request, 'pizza/order.html', {
