@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nadia's Garden</title>
-</head>
-
-<body>
-    <h1>Nadia's Garden</h1>
-    <a href="{% url 'order' %}">Order a Pizza</a>
-</body>
-
-</html>
+{% extends 'pizza/base.html' %}
+{% block content %}
+{% load static %}
+<div class="">
+    <img src="{% static 'nandiasgarden.jpg' %}" class="img-fluid" alt="nandia's garden">
+</div>
+{% endblock %}

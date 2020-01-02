@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Pizza</title>
-</head>
-
-<body>
-    <h2>Edit Pizza</h2>
-    <form action="{% url 'edit_order' pizza.id %}" method="POST">
-        {% csrf_token %}
-        {{ pizza_form.as_p }}
-        <input type="submit" value="Edit Pizza">
-    </form>
-    {% if note %}
-    <h2>{{note}}</h2>
-    {% endif %}
-    <h2><a href="{% url 'index' %}">Go Home</a></h2>
-</body>
-
-</html>
+{% extends 'pizza/base.html' %}
+{% block content %}
+<h2>Edit Pizza</h2>
+<form action="{% url 'edit_order' pizza.id %}" method="POST">
+    {% csrf_token %}
+    {{ pizza_form.as_p }}
+    <input type="submit" value="Edit Pizza">
+</form>
+{% if note %}
+<h2>{{note}}</h2>
+{% endif %}
+<h2><a href="{% url 'index' %}">Go Home</a></h2>
+{% endblock %}
