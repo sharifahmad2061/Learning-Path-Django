@@ -18,7 +18,6 @@ class PizzaForm(forms.Form):
 #         labels = {
 #             'topping1': 'Topping 1',
 #             'topping2': 'Topping 2',
-#             'size': 'Size'
 #         }
 
 

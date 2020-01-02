@@ -15,6 +15,7 @@ def order(request):
         filled_form = PizzaForm(request.POST)
         if filled_form.is_valid():
             # save pizza order to db
+            # filled_form.save()
             pizza = Pizza()
             size = Size.objects.get(
                 title=filled_form.cleaned_data['pizza_size'])
