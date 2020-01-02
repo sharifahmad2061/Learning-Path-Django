@@ -15,17 +15,17 @@ def order(request):
         filled_form = PizzaForm(request.POST)
         if filled_form.is_valid():
             # save pizza order to db
-            # filled_form.save()
-            pizza = Pizza()
-            size = Size.objects.get(
-                title=filled_form.cleaned_data['pizza_size'])
-            pizza.topping1 = filled_form.cleaned_data['topping1']
-            pizza.topping2 = filled_form.cleaned_data['topping2']
-            pizza.size = size
-            pizza.save()
+            filled_form.save()
+            # pizza = Pizza()
+            # size = Size.objects.get(
+            #     title=filled_form.cleaned_data['pizza_size'])
+            # pizza.topping1 = filled_form.cleaned_data['topping1']
+            # pizza.topping2 = filled_form.cleaned_data['topping2']
+            # pizza.size = size
+            # pizza.save()
             #send user response
             response = 'Your {} pizza with {} & {} toppings is on its way!'.format(
-                filled_form.cleaned_data['pizza_size'],
+                filled_form.cleaned_data['size'],
                 filled_form.cleaned_data['topping1'],
                 filled_form.cleaned_data['topping2'])
             new_form = PizzaForm()
@@ -73,3 +73,7 @@ def multiple_pizzas(request):
             'note': 'there was some error in multiple form',
             'formset': formset
         })
+
+
+def edit_order(request, pizza_id):
+    pizza = Pizza.objects.get(id=pizza_id)

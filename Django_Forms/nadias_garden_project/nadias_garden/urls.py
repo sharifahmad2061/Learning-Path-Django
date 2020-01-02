@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('order', views.order, name='order'),
     path('pizzas', views.multiple_pizzas, name='multiple_pizzas'),
+    path('order/<int:pizza_id>', views.edit_order, name='edit_order'),
 ]
